@@ -81,6 +81,21 @@ function handleKey(e) {
 }
 
 // Clear (shake) Function
+function clearCanvas() {
+  CANVAS.classList.add('shake');
+  CTX.clearRect(0, 0, width, height);
+  CANVAS.addEventListener(
+    'animationend',
+    function() {
+      console.info('removing shake class');
+      CANVAS.classList.remove('shake');
+    },
+    { once: true }
+  );
+}
 
 // Listen for arrow keys
 window.addEventListener('keydown', handleKey);
+
+// Listen for shake button click
+SHAKE_BTN.addEventListener('click', clearCanvas);
