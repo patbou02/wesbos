@@ -24,7 +24,9 @@ const { width, height } = CANVAS;
 // Create random starting X and Y coordinates.
 let X = Math.floor(Math.random() * width);
 let Y = Math.floor(Math.random() * height);
+let hue = 0;
 
+CTX.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 CTX.beginPath();
 CTX.moveTo(X, Y);
 CTX.lineTo(X, Y);
@@ -38,6 +40,8 @@ CTX.stroke();
 //   console.log(options);
 // }
 function draw({ key }) {
+  // increment the hue
+  hue += 1;
   console.info(key);
   // start the path
   CTX.beginPath();
@@ -63,6 +67,7 @@ function draw({ key }) {
     default:
       break;
   }
+  CTX.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   CTX.lineTo(X, Y);
   CTX.stroke();
 }
