@@ -8,10 +8,10 @@ const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 function handleTabClick(event) {
   // mark all tabs as unselected
   tabButtons.forEach(button => {
-    button.setAttribute('aria-selected', 'false');
+    button.setAttribute('aria-selected', false);
   });
   // mark the clicked tab as selected
-  event.originalTarget.setAttribute('aria-selected', 'true');
+  event.originalTarget.setAttribute('aria-selected', true);
 
   // find topic for the clicked tab
   const tabTopic = event.originalTarget.attributes['id'].value;
