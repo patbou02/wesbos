@@ -5,16 +5,10 @@ const tabs = document.querySelector('.tabs');
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
 const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
-
-
-tabButtons.forEach(function(element) {
-  element.addEventListener('click', handleTabClick);
-});
-
 function handleTabClick(event) {
   // mark all tabs as unselected
-  tabButtons.forEach(function(tab) {
-    tab.attributes['aria-selected'].value = 'false';
+  tabButtons.forEach(button => {
+    button.attributes['aria-selected'].value = 'false';
   });
   // mark the clicked tab as selected
   event.originalTarget.attributes['aria-selected'].value = 'true';
@@ -32,3 +26,5 @@ function handleTabClick(event) {
     }
   });
 }
+
+tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
