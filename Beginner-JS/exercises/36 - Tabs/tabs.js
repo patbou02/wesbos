@@ -6,25 +6,20 @@ const tabButtons = tabs.querySelectorAll('[role="tab"]');
 const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
 function handleTabClick(event) {
+  // hide all tab panels
+  tabPanels.forEach(panel => { panel.hidden = true });
+
   // mark all tabs as unselected
   tabButtons.forEach(button => {
     button.setAttribute('aria-selected', false);
   });
   // mark the clicked tab as selected
-  event.originalTarget.setAttribute('aria-selected', true);
+  event.currentTarget.setAttribute('aria-selected', true);
 
-  // find topic for the clicked tab
-  const tabTopic = event.originalTarget.attributes['id'].value;
-
-  tabPanels.forEach(panel => {
-    // hide all tab panels
-    panel.hidden = true;
-
-    // find the associated tabPanel and show it if topic matches tab topic
-    if (tabTopic === panel.attributes['aria-labelledby'].value) {
-      panel.hidden = false;
-    }
-  });
+  // find the associated tabPanel and show it
+  const { id } = event.currentTarget;
+  const tabPanel = tabs.querySelector(`[aria-labelledby="${id}"]`);
+  tabPanel.hidden = false;
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
