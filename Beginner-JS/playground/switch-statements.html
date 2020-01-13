@@ -11,7 +11,68 @@
 
 <body>
   <img width="200" src="turtle.png" alt="Turt" class="turt">
+  <script>
+    const turtle = document.querySelector('.turt');
+    const sensitivity = 25;
+    let positionX = 0;
+    let positionY = 0;
 
+    function handleKeyDown(event) {
+      console.log(event.key);
+      switch (event.key) {
+        case 'ArrowUp':
+          moveTurtle('UP');
+          break;
+        case 'ArrowDown':
+          moveTurtle('DOWN');
+          break;
+        case 'ArrowLeft':
+          moveTurtle('LEFT');
+          break;
+        case 'ArrowRight':
+          moveTurtle('RIGHT');
+          break;
+        default:
+          console.log('Turtle can\'t move with that key.');
+          return false;
+      }
+    }
+
+    function moveTurtle(direction) {
+      turtle.style.position = 'absolute';
+      switch (direction) {
+        case 'UP':
+          (positionY >= 0) ? (positionY -= sensitivity) : null;
+          turtle.style.top = `${positionY}px`;
+          turtle.style.transform = 'scaleX(-1)';
+          turtle.style.rotate = '90deg';
+          break;
+        case 'DOWN':
+          (positionY <= (window.innerHeight - turtle.height)) ? (positionY += sensitivity) : null;
+          turtle.style.top = `${positionY}px`;
+          turtle.style.transform = 'scaleX(1)';
+          turtle.style.rotate = '90deg';
+          break;
+        case 'LEFT':
+          (positionX >= 0) ? (positionX -= sensitivity) : null;
+          turtle.style.left = `${positionX}px`;
+          turtle.style.transform = 'scaleX(-1)';
+          turtle.style.rotate = '0deg';
+          break;
+        case 'RIGHT':
+          (positionX <= (window.innerWidth - turtle.width)) ? (positionX += sensitivity) : null;
+          turtle.style.left = `${positionX}px`;
+          turtle.style.transform = 'scaleX(1)';
+          turtle.style.rotate = '0deg';
+          break;
+        default:
+          return false;
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+  </script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 
 </html>
